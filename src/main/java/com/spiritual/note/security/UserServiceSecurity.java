@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceSecurity implements UserDetailsService {
 
     //i will not send password as a plain text, so i need to encrypt it
-    @Bean
+   @Bean
     private PasswordEncoder passwordEncoder()
     {
         return new BCryptPasswordEncoder();

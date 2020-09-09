@@ -19,7 +19,7 @@ public class UserServices {
     /*
     * set users manually
     * */
-    public void setUsers()
+    public String setUsers()
     {
         User user1=new User();
         user1.setName("Youssif Saad");
@@ -35,9 +35,11 @@ public class UserServices {
 
         User user3=new User();
         user3.setName("Nabil Saad");
-        user3.setAge(34);
+        user3.setAge(33);
         user3.setPassword("password3");
         userRepository.save(user3);
+
+        return "Created Successfully";
     }
 
     public Iterable<User> getAllUsers()
@@ -75,6 +77,5 @@ public class UserServices {
             throw new NotFoundExceptionHandler(String.format("This user with id: [%s] not found",id));
         }
     }
-
 
 }
