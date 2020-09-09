@@ -21,25 +21,15 @@ public class UserServices {
     * */
     public String setUsers()
     {
-        User user1=new User();
-        user1.setName("Youssif Saad");
-        user1.setAge(24);
-        user1.setPassword("password1");
-        userRepository.save(user1);
-
-        User user2=new User();
-        user2.setName("Hany Saad");
-        user2.setAge(31);
-        user2.setPassword("password2");
-        userRepository.save(user2);
-
-        User user3=new User();
-        user3.setName("Nabil Saad");
-        user3.setAge(33);
-        user3.setPassword("password3");
-        userRepository.save(user3);
-
-        return "Created Successfully";
+        for (int i=0;i<=10;i++)
+        {
+            User user=new User();
+            user.setName("username"+i);
+            user.setPassword("password"+i);
+            user.setAge(20+i);
+            userRepository.save(user);
+        }
+        return "Users Created Successfully";
     }
 
     public Iterable<User> getAllUsers()

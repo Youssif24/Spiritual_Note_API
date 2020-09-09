@@ -1,32 +1,21 @@
-package ServicesTest;
+package ControllersTest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spiritual.note.controller.UserController;
 import com.spiritual.note.model.entity.User;
-import com.spiritual.note.model.repository.UserRepository;
 import com.spiritual.note.service.UserServices;
 import org.hamcrest.Matchers;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import javax.print.attribute.standard.Media;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -45,6 +34,7 @@ public class UserControllerTest {
 
     //convert object as a json string
     ObjectMapper mapper=new ObjectMapper();
+
 
     @Test
     public void createUsersTest() throws Exception {
@@ -69,8 +59,8 @@ public class UserControllerTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content(mapper.writeValueAsString(user)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name", Matchers.is("Kevin")))
-                .andExpect(jsonPath("$.age",Matchers.is(27)));
+                .andExpect(jsonPath("$.name", Matchers.is(user.getName())))
+                .andExpect(jsonPath("$.age",Matchers.is(user.getAge())));
     }
 
     @Test
@@ -83,8 +73,8 @@ public class UserControllerTest {
         mockMvc.perform(get("/api/users/getAll")
         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].name",Matchers.is("Garcia")))
-                .andExpect(jsonPath("$[1].name",Matchers.is("Freddie")));
+                .andExpect(jsonPath("$[0].name",Matchers.is(userList.get(0).getName())))
+                .andExpect(jsonPath("$[1].name",Matchers.is(userList.get(1).getName())));
     }
 
 
@@ -96,6 +86,6 @@ public class UserControllerTest {
         mockMvc.perform(get("/api/users/findUser/0")
         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name",Matchers.is("Victoria")));
+                .andExpect(jsonPath("$.name",Matchers.is(user0.getName())));
     }
 }

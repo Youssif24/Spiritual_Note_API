@@ -10,7 +10,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //if i have many urls, i will set all in array
     public final String[] UNAUTH_ENDPOINTS={
-            "/api/users/",
+           "/api/users/",
             "/api/notes/"
     };
 
